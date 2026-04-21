@@ -41,7 +41,7 @@ class ExpenseController extends Controller
 
         Expense::create($validated);
 
-        return redirect()->route('expenses.index')
+        return redirect()->route('dashboard')
             ->with('success', 'Expense created successfully.');
     }
 

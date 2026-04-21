@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('expenses', ExpenseController::class);
 }); 
 
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'display'])->name('dashboard')->middleware('auth');
 
 
 require __DIR__.'/auth.php';
