@@ -15,7 +15,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable ;
 
     /**
      * Get the attributes that should be cast.
@@ -35,5 +35,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Expense::class);
     }
+
+    # Define role constants
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
 
 }
