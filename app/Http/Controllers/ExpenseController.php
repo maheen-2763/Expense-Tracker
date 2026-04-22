@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ExpenseStoreRequest;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Http\Requests\ExpenseUpdateRequest;
 use App\Models\User;
@@ -13,18 +14,18 @@ class ExpenseController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index()
-    {
-        if (Auth::user()->role === User::ROLE_ADMIN) {
-            $expenses = Expense::latest()->paginate(10);
-        } else {
-        $expenses = Expense::owned()
-            ->latest()
-            ->paginate(10);
+    public function index(Request $request)
+{
+    $expenses =
+    Expense::query()
+    ->owned()
+    ->filter(request()->all())
+    ->latest()
+    ->paginate(10)
+    ->withQueryString();
 
-        return view('expenses.index', compact('expenses'));
-        }
-    }
+    return view('expenses.index', compact('expenses'));
+}
 
     public function create()
     {
@@ -32,6 +33,7 @@ class ExpenseController extends Controller
 
         return view('expenses.create');
     }
+
 
     public function store(ExpenseStoreRequest $request)
     {

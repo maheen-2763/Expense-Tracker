@@ -1,23 +1,30 @@
-<aside id="sidebar"
-       class="fixed md:static z-50 top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full md:translate-x-0 transition duration-200">
+<aside class="w-64 bg-white shadow-lg hidden md:flex flex-col">
 
-    <div class="p-6 text-xl font-bold text-blue-600">
-        Dashboard
+    <!-- Logo -->
+    <div class="p-6 text-xl font-bold text-blue-600 border-b">
+        💰 ExpenseTracker
     </div>
 
-    <nav class="px-4 space-y-2">
+    <!-- Navigation -->
+    <nav class="flex-1 px-4 py-4 space-y-2">
 
         <a href="{{ route('dashboard') }}"
-           class="block px-4 py-2 rounded-lg
-           {{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600 dark:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-            Dashboard
+           class="block px-4 py-2 rounded-lg 
+           {{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600 font-medium' : 'hover:bg-gray-100' }}">
+            📊 Dashboard
         </a>
 
         <a href="{{ route('expenses.index') }}"
-           class="block px-4 py-2 rounded-lg
-           {{ request()->routeIs('expenses.*') ? 'bg-blue-50 text-blue-600 dark:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-            Expenses
+           class="block px-4 py-2 rounded-lg 
+           {{ request()->routeIs('expenses.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'hover:bg-gray-100' }}">
+            💸 Expenses
         </a>
 
     </nav>
+
+    <!-- Footer -->
+    <div class="p-4 border-t text-sm text-gray-500 text-center">
+        © {{ date('Y') }} ExpenseTracker
+    </div>
+
 </aside>
