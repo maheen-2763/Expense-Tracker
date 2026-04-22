@@ -7,13 +7,13 @@
 <!-- Stats Cards -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
+    <!-- Welcome Alert -->
     @if(session('welcome'))
     <div 
         class="md:col-span-3 bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-6 transition-opacity duration-500"
-        id="welcome-alert"
-    >
+        id="welcome-alert">
         {{ session('welcome') }}
-    </div>
+    </div> 
 @endif
 
     <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
