@@ -5,6 +5,7 @@
     <title>@yield('title', 'Expense Tracker')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -24,10 +25,8 @@
         <main class="p-6">
             @yield('content')
         </main>
-        
-
+    
     </div>
-
 </div>
     @stack('scripts')
 </body>
