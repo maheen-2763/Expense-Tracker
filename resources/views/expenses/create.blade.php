@@ -6,6 +6,7 @@
 
 <div class="max-w-2xl mx-auto py-12 px-6">
 
+
     <!-- Header -->
     <div class="mb-10">
         <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">
@@ -30,6 +31,7 @@
                 name="title"
                 value="{{ old('title') }}"
                 placeholder="e.g. Freelance payment"
+                autofocus
                 class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900 placeholder-gray-400"
             >
             @error('title')
@@ -81,7 +83,7 @@
             <input 
                 type="date"
                 name="date"
-                value="{{ old('date') }}"
+                value="{{ old('date', now()->format('Y-m-d')) }}"
                 class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900"
             >
 
@@ -98,7 +100,7 @@
             >
                 Save
             </button>
-                <a href="{{ route('expenses.index') }}" class="px-5 py-2 bg-black text-white text-sm font-medium rounded-md hover:bg-gray-800 transition">
+                <a href="{{ route('expenses.index') }}" class="px-5 py-2 bg-gray-500 text-white text-sm font-medium rounded-md hover:bg-gray-600 transition">
                     Back
                 </a>
         </div>

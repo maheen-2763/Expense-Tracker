@@ -1,48 +1,35 @@
-<header class="bg-white border-b border-gray-100 px-6 h-14 flex items-center">
+<header class="bg-white border-b border-gray-100 px-6 h-14 flex items-center justify-between">
 
-    <!-- LEFT: Page context -->
-    <div class="flex items-center min-w-[180px]">
+    <!-- LEFT: Title + subtle product feel -->
+    <div class="flex items-center gap-3">
 
-        <h2 class="text-sm font-medium text-gray-900 tracking-tight">
-            @yield('title')
-        </h2>
-
-    </div>
-
-    <!-- CENTER: Command-style search -->
-    <div class="flex-1 flex justify-center hidden md:flex">
-
-        <form method="GET" action="{{ route('expenses.index') }}" class="w-full max-w-md">
-
-            <div class="relative">
-
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-                    🔍
-                </span>
-
-                <input
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
-                    placeholder="Search expenses..."
-                    class="w-full pl-9 pr-3 py-2 text-sm
-                    bg-gray-50 border border-gray-200 rounded-md
-                    focus:bg-white focus:border-gray-300 focus:ring-0
-                    transition outline-none"
-                >
-
-            </div>
-
-        </form>
+        <div class="flex flex-col leading-tight">
+            <h2 class="text-sm font-semibold text-gray-900 tracking-tight">
+                @yield('title')
+            </h2>
+        </div>
 
     </div>
 
-    <!-- RIGHT: User -->
-    <div class="flex items-center justify-end min-w-[180px]">
+    <!-- CENTER: Command-style search (Linear-inspired) -->
+    <x-search 
+    :action="route('expenses.index')" 
+    placeholder="Search expenses, categories..."
+/>
 
+    <!-- RIGHT: User + actions -->
+    <div class="flex items-center gap-3">
+
+        <!-- Quick Add Button (Linear style CTA) -->
+        <a href="{{ route('expenses.create') }}"
+           class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 text-sm
+           bg-black text-white rounded-md hover:bg-gray-900 transition">
+            + Add Expense
+        </a>
+
+        <!-- User dropdown -->
         <div x-data="{ open: false }" class="relative">
 
-            <!-- Trigger -->
             <button @click="open = !open"
                 class="flex items-center gap-2">
 
@@ -54,16 +41,16 @@
                             flex items-center justify-center text-xs font-medium text-gray-700">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
-
             </button>
 
             <!-- Dropdown -->
             <div x-show="open"
                  @click.outside="open = false"
                  x-transition
-                 class="absolute right-0 mt-2 w-44 bg-white border border-gray-100
-                        rounded-md shadow-sm overflow-hidden z-50">
+                 class="absolute right-0 mt-2 w-48 bg-white border border-gray-100
+                        rounded-lg shadow-sm overflow-hidden z-50">
 
+                <!-- User info -->
                 <div class="px-3 py-2 border-b border-gray-100">
                     <p class="text-sm font-medium text-gray-900">
                         {{ Auth::user()->name }}
@@ -73,6 +60,7 @@
                     </p>
                 </div>
 
+                <!-- Links -->
                 <a href="{{ route('dashboard') }}"
                    class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">
                     Dashboard
@@ -83,6 +71,7 @@
                     Settings
                 </a>
 
+                <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
@@ -92,9 +81,7 @@
                 </form>
 
             </div>
-
         </div>
 
     </div>
-
 </header>

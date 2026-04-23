@@ -26,15 +26,16 @@
             </div>
 
         </div>
-
+       
         <!-- Welcome Alert -->
-        @if(session('welcome'))
-            <div id="welcome-alert"
-                class="rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-700
-                       shadow-sm transition-all duration-500">
-                {{ session('welcome') }}
-            </div>
-        @endif
+       
+
+        <button class="px-4 py-2 bg-black text-white text-sm rounded-md">
+            <a href="{{ route('expenses.create') }}">
+    + Add Expense
+</a>
+</button>
+
 
         <!-- Stats -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -170,7 +171,8 @@
                             </li>
                         @empty
                             <li class="text-sm text-gray-400 text-center py-6">
-                                No transactions yet
+                                No expenses yet — start by adding your first one ↑
+
                             </li>
                         @endforelse
 
@@ -199,6 +201,43 @@
     }, 3000);
 </script>
 @endpush
+
+@push('scripts')
+<script>
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+
+    const colors = {
+        success: 'bg-emerald-50 border-emerald-200 text-emerald-700',
+        error: 'bg-red-50 border-red-200 text-red-700',
+        info: 'bg-blue-50 border-blue-200 text-blue-700'
+    };
+
+    const toast = document.createElement('div');
+    toast.className = `
+        px-4 py-3 rounded-lg border shadow-sm text-sm
+        ${colors[type]}
+        opacity-0 translate-y-2 transition-all duration-300
+    `;
+
+    toast.innerText = message;
+
+    container.appendChild(toast);
+
+    // Animate in
+    setTimeout(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+    }, 10);
+
+    // Auto remove
+    setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+</script>
+@endpush
+
 
 
 @push('scripts')

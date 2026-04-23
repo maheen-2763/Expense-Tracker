@@ -31,6 +31,7 @@
                 name="title"
                 value="{{ old('title', $expense->title) }}"
                 placeholder="e.g. Freelance payment"
+                autofocus
                 class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900 placeholder-gray-400"
             >
             @error('title')

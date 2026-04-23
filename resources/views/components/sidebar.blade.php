@@ -70,10 +70,9 @@
 
         </a>
 
-    </nav>
 
-    <!-- CTA -->
-    <div class="px-2 pb-3">
+
+        <div class="px-2 pb-3">
 
         <a href="{{ route('expenses.create') }}"
            title="New Expense"
@@ -90,6 +89,11 @@
         </a>
 
     </div>
+
+    </nav>
+
+    <!-- CTA -->
+    
 
     <!-- Footer -->
     <div class="px-3 py-3 border-t border-gray-100 text-[11px] text-gray-400 text-center">

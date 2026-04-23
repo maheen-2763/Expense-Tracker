@@ -31,7 +31,7 @@
                <div class="relative">
     <input id="email" type="email" name="email" required placeholder=" "
         class="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-lg
-        focus:ring-2 focus:ring-black focus:border-black transition bg-white">
+        focus:ring-2 focus:ring-black focus:border-black transition bg-white autofocus">
 
     <label class="absolute left-4 top-2 text-gray-400 text-sm transition-all
         peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base
