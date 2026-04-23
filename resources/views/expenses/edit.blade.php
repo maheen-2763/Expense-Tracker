@@ -4,109 +4,112 @@
 
 @section('content')
 
-<div class="flex items-center justify-center min-h-[80vh]">
+<div class="max-w-2xl mx-auto py-12 px-6">
 
-    <!-- Card -->
-    <div class="w-full max-w-lg bg-white shadow-md rounded-2xl p-6 md:p-8">
+    <!-- Header -->
+    <div class="mb-10">
+        <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">
+            Edit Expense
+        </h1>
+        <p class="text-sm text-gray-500 mt-2">
+            Update your transaction details.
+        </p>
+    </div>
+
+    <!-- Form -->
+    <form method="POST" action="{{ route('expenses.update', $expense->id) }}" class="space-y-8">
+        @csrf
+        @method('PUT')
 
         <!-- Title -->
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-            Edit Expense
-        </h2>
+        <div>
+            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                Title
+            </label>
+            <input 
+                type="text"
+                name="title"
+                value="{{ old('title', $expense->title) }}"
+                placeholder="e.g. Freelance payment"
+                class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900 placeholder-gray-400"
+            >
+            @error('title')
+                <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+            @enderror
+        </div>
 
-        <!-- Form -->
-        <form method="POST" action="{{ route('expenses.update', $expense->id) }}" class="space-y-5">
-            @csrf
-            @method('PUT')
+        <!-- Amount -->
+        <div>
+            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                Amount
+            </label>
+            <input 
+                type="number"
+                name="amount"
+                value="{{ old('amount', $expense->amount) }}"
+                placeholder="0"
+                class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900 placeholder-gray-400"
+            >
+            @error('amount')
+                <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+            @enderror
+        </div>
 
-            <!-- Title -->
-            <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">
-                    Title
-                </label>
-                <input 
-                    type="text" 
-                    name="title"
-                    value="{{ old('title', $expense->title) }}"
-                    placeholder="Enter expense title"
-                    class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none
-                        @error('title') border-red-500 @enderror"
-                >
+        <!-- Type -->
+        <div>
+            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                Type
+            </label>
+            <select 
+                name="type"
+                class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900"
+            >
+                <option value="">Select type</option>
+                <option value="income" {{ old('type', $expense->type) == 'income' ? 'selected' : '' }}>Income</option>
+                <option value="expense" {{ old('type', $expense->type) == 'expense' ? 'selected' : '' }}>Expense</option>
+            </select>
 
-                @error('title')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            @error('type')
+                <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+            @enderror
+        </div>
 
-            <!-- Amount -->
-            <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">
-                    Amount
-                </label>
-                <input 
-                    type="number" 
-                    name="amount"
-                    value="{{ old('amount', $expense->amount) }}"
-                    placeholder="Enter amount"
-                    class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none
-                        @error('amount') border-red-500 @enderror">
-
-                @error('amount')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Type -->
-            <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">
-                    Type
-                </label>
-                <select 
-                    name="type"
-                    class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none
-                        @error('type') border-red-500 @enderror"
-                >
-                    <option value="">Select type</option>
-                    <option value="income" {{ old('type', $expense->type) == 'income' ? 'selected' : '' }}>Income</option>
-                    <option value="expense" {{ old('type', $expense->type) == 'expense' ? 'selected' : '' }}>Expense</option>
-                </select>
-
-                @error('type')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Date -->
-            <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">
-                    Date
-                </label>
-                <input 
-                type="date" 
+        <!-- Date -->
+        <div>
+            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                Date
+            </label>
+            <input 
+                type="date"
                 name="date"
                 value="{{ old('date', $expense->date?->format('Y-m-d') ?? '') }}"
-                class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none
-                @error('date') border-red-500 @enderror"
-/>
+                class="w-full border-0 border-b border-gray-200 focus:border-black focus:ring-0 bg-transparent py-2 text-gray-900"
+            >
 
-                @error('date')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            @error('date')
+                <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+            @enderror
+        </div>
 
-            <!-- Submit -->
-            <div class="pt-2">
-                <button 
-                    type="submit"
-                    class="w-full bg-blue-500 text-white py-2.5 rounded-xl font-medium hover:bg-blue-600 transition"
-                >
-                    Update Expense
-                </button>
-            </div>
+        <!-- Actions -->
+        <div class="pt-6 flex items-center gap-3">
+            <button 
+                type="submit"
+                class="px-5 py-2 bg-black text-white text-sm font-medium rounded-md hover:bg-gray-800 transition"
+            >
+                Update
+            </button>
 
-        </form>
+            <a 
+                href="{{ route('expenses.index') }}"
+                class="text-sm text-gray-500 hover:text-gray-900 transition"
+            >
+                Cancel
+            </a>
+        </div>
 
-    </div>
+    </form>
+
 </div>
 
 @endsection
